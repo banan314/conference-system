@@ -1,0 +1,12 @@
+speeches
+revs_alloc
+reviews
+payments
+entries
+applications
+reviewers
+accommodations
+conferences
+administrators
+papers
+users
