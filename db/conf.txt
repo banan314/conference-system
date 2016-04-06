@@ -1,0 +1,16 @@
+Connection Settings
+
+Host
+    ec2-23-21-157-223.compute-1.amazonaws.com
+Database
+    d628d0p7sa1k73
+User
+    mruopkbmwcuttf
+Port
+    5432
+Password
+    QM_HcNbRk-b7Aam3IaMgnweVYM 
+Psql
+    heroku pg:psql --app heroku-postgres-51aa4a78 HEROKU_POSTGRESQL_MAUVE
+URL
+    postgres://mruopkbmwcuttf:QM_HcNbRk-b7Aam3IaMgnweVYM@ec2-23-21-157-223.compute-1.amazonaws.com:5432/d628d0p7sa1k73 
