@@ -1,0 +1,262 @@
+*:focus {
+    outline: none;
+}
+
+.header-container {
+    text-align: center;
+}
+
+.img-responsive {
+    display: inline-block;
+    margin-top: 55px;
+}
+
+.page-name {
+    margin: 0;
+    text-transform: uppercase;
+    font-family: "Lato";
+    font-weight: 900;
+    font-size: 60px;
+    line-height: 45px;
+    color: #1a936f;
+}
+
+
+.page-name-description {
+    margin: 0;
+    text-transform: uppercase;
+    font-family: "Lato";
+    font-weight: 700;
+    font-size: 30px;
+    color: #104b5e;
+}
+
+section::before {
+    display: block;
+    margin: 97px  46% 54px ;
+    color: #1a936f;
+    border-style: solid;
+    border-width: 1em 1em 0 0;
+    content: '';
+    height: 3em;
+    left: 0.15em;
+    position: relative;
+    top: 0;
+    transform: rotate(135deg);
+    vertical-align: top;
+    width: 3em;
+}
+
+
+
+.registration-header {
+    padding-top: 50px;
+    padding-left: 100px;
+    position: relative;
+    color: #fff;
+    font-family: "Lato";
+    font-weight: 900;
+}
+
+.registration-header:before {
+    content: "";
+    width: 12px;
+    height: 13px;
+    background: white;
+    position: absolute;
+    left: 75px;
+    top: 56px;
+}
+
+.login-column {
+    height: 300px;
+}
+
+.login-container {
+    background-color: #1a936f;
+    height: 100%;
+}
+
+.registration-column {
+    height: 400px;
+}
+
+.registration-container {
+    background-color: #6dbbd5;
+    height: 100%;
+}
+
+.registration-image {
+    background: url("../src/registration-bg.png");
+    height: 242px;
+    background-size: cover;
+}
+
+.info-container {
+    height: 100%;
+    background: url("../src/about-acc-bg.png") no-repeat ;
+    background-size: cover;
+    text-align: center;
+}
+
+.about-acc {
+    color: #124b5f;
+    font-family: "Lato";
+    font-size: 15px;
+    font-weight: 300;
+    padding-top: 50px;
+
+}
+
+.form-group {
+    text-align: center;
+    padding-top: 10px;
+}
+
+.labels {
+    font-family: "Lato";
+    font-weight: 300;
+    padding-right: 15px;
+    color: #cbf0d6;
+}
+
+#username, #password {
+    font-family: "Lato";
+    font-weight: 300;
+    border: none;
+    width: 156px;
+    height: 26px;
+    background-color: #d8f6de;
+}
+
+
+#login {
+    font-family: "Lato";
+    font-size: 13px;
+    font-weight: 300;
+    width: 156px;
+    height: 26px;
+    background-color: #6dbbd5;
+    border: none;
+    margin-left: 80px;
+}
+
+#register {
+    font-family: "Lato";
+    font-size: 13px;
+    font-weight: 300;
+    width: 156px;
+    height: 26px;
+    background-color: #d8f6de;;
+    border: none;
+    margin-left: 80px;
+}
+
+#username, #password:active {
+    border-style:  none;
+}
+
+
+#signin-username, #usermail, #signin-password, #reply-password {
+    font-family: "Lato";
+    font-weight: 300;
+    border: none;
+    width: 156px;
+    height: 26px;
+    background-color: #d8f6de;
+}
+
+.signin-email {
+    padding-left: 23px;
+}
+
+.signin-password {
+    padding-left: 2px;
+}
+
+.signin-reply-password {
+    position: relative;
+    right: 15px;
+}
+
+.cloud {
+    font-family: "Lato";
+    font-size: 14px;
+    font-weight: 600;
+    background: url("../src/cloud.png") no-repeat;
+    width: 300px;
+    height: 267px;
+    padding-top: 50px;
+    margin-top: 55px;
+    margin-left: 40px;
+    color: #ffffff;
+}
+
+.about-project {
+    padding-left: 15%;
+}
+
+.about-project-tittle {
+    font-family: "Lato";
+    font-size: 30px;
+    font-weight: 900;
+    color: #1a936f;
+}
+
+.about-project-first-text {
+    font-family: "Lato";
+    font-size: 14px;
+    font-weight: 300;
+    padding-top: 30px;
+}
+
+.about-project-second-text {
+    font-family: "Lato";
+    font-size: 14px;
+    font-weight: 300;
+    color: #1a936f;
+}
+
+.footer-container {
+    background: url("../src/footer-bg.png")no-repeat;
+    height: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.footer-website {
+    display:flex;
+    justify-content: center;
+}
+
+.footer-nav {
+    list-style-type: none;
+    display: flex;
+}
+
+.footer-nav li a {
+    color: #164e62;
+    font-family: "Lato";
+    font-size: 15px;
+    font-weight: 400;
+}
+
+.footer-nav li a:hover, .footer-nav li a:visited, .footer-nav li a:active, .footer-nav li a:focus {
+    text-decoration: none;
+}
+
+
+
+.footer-nav li:not(:last-child)::after {
+    content: "-";
+    color: #164e62;
+    padding-left: 25px;
+    padding-right: 25px;
+}
+
+.footer-nav li:last-child {
+    padding-right: 35px;
+}
+
+

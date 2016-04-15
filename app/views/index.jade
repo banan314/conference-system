@@ -1,0 +1,89 @@
+extends layout
+
+block content
+  header
+    .header-container
+      img.img-responsive(src='/src/logo.png', alt='logo')
+      p.page-name Conference
+      p.page-name-description online system
+  .container
+    section
+      .row.login-column
+        .col-lg-8.login-container
+          h3.registration-header LOG IN
+          form.form-horizontal
+            .form-group
+              label.labels(for='username') username:
+              input#username(name='username', type='text', required)
+            .form-group
+              label.labels(for='password') password:
+              input#password(type='password', name='password', required)
+            .form-group
+              input#login(type='submit', value='log me in')
+        .col-lg-4.info-container
+          p.about-acc Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed bibendum aliquet lectus, id gravida eros facilisis vitae. Duis rhoncus efficitur lacus quis consequat. Morbi in accumsan lorem, at egestas risus. Nunc mollis ullamcorper suscipit. Interdum et malesuada fames ac ante ipsum primis in faucibus. Maecenas sagittis leo sem, in elementum ligula pulvinar vel. Phasellus et luctus nunc. Nulla vel facilisis nisl.
+      .row.registration-column
+        .col-lg-8.registration-container
+          h3.registration-header SIGN IN
+          form.form-horizontal
+            .form-group
+              label.labels(for='signin-username') username:
+              input#signin-username(type='text', name='signin-username', required)
+            .form-group
+              label.labels.signin-email(for='usermail') e-mail:
+              input#usermail(type='email', name='email', required)
+            .form-group
+              label.labels.signin-password(for='signin-password') password:
+              input#signin-password(type='password', name='sigin-password', required)
+            .form-group
+              label.labels.signin-reply-password(for='reply-password') reply password:
+              input#reply-password.signin-reply-password(type='password', name='reply-password', required)
+            .form-group
+              input#register(type='submit', value='register me')
+        .col-lg-4.registration-image
+    section
+      .row
+        .col-lg-4.cloud
+          div(style="float:left;clear:left;height:15px;width:37px")
+          div(style="float:right;clear:right;height:15px;width:67px")
+          div(style="float:left;clear:left;height:15px;width:9px")
+          div(style="float:right;clear:right;height:15px;width:60px")
+          div(style="float:left;clear:left;height:15px;width:2px")
+          div(style="float:right;clear:right;height:15px;width:53px")
+          div(style="float:left;clear:left;height:15px;width:3px")
+          div(style="float:right;clear:right;height:15px;width:52px")
+          div(style="float:left;clear:left;height:15px;width:13px")
+          div(style="float:right;clear:right;height:15px;width:62px")
+          div(style="float:left;clear:left;height:15px;width:28px")
+          div(style="float:right;clear:right;height:15px;width:72px")
+          div(style="float:left;clear:left;height:15px;width:0px")
+          div(style="float:right;clear:right;height:15px;width:0px")
+          div(style="float:left;clear:left;height:15px;width:0px")
+          div(style="float:right;clear:right;height:15px;width:0px")
+          div(style="float:left;clear:left;height:15px;width:0px")
+          div(style="float:right;clear:right;height:15px;width:0px")
+          q Dobra komunikacja pobudza jak czarna kawa. I równie trudno po niej zasnąć. – Ann Morrow Lindbergh
+        article.col-lg-8.about-project
+          h3.about-project-tittle Few words about project ...
+          p.about-project-first-text Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum hendrerit justo nisi, et tristique enim eleifend et. Cras nunc tellus, dapibus quis cursus vitae, pharetra pharetra orci. Praesent maximus mi vel elit faucibus, eget placerat tortor consequat. Donec eleifend tellus non orci faucibus, quis cursus elit tincidunt. Nunc commodo velit ac tempor auctor. Praesent interdum odio lorem, a venenatis nunc condimentum ut. Nam vitae sagittis odio. Vestibulum aliquet massa eu erat tristique gravida.
+          p.about-project-second-text Nullam quis eros dapibus eros sodales sagittis. Sed ac neque tristique est pulvinar semper. Donec bibendum, turpis ut gravida scelerisque, ex arcu facilisis felis, at facilisis tellus eros ac tortor. Vestibulum consectetur sapien auctor, tincidunt massa non, pretium sem. Vestibulum justo eros, ornare at mi vel, placerat sollicitudin dui. Vestibulum pellentesque interdum dapibus. Nam in viverra justo, ac aliquet enim.
+    section
+      footer
+        .row.footer-website
+          .col-lg-10.footer-container
+            ul.footer-nav
+              li
+                a(href="", title="go to the top this website") to the top
+              li
+                a(href="www.google.com", title="contact to owners") fast contact
+              li
+                a(href="www.google.com", title="read about authors this system") authors
+
+
+
+
+
+
+
+
+
