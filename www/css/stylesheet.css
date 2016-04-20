@@ -158,7 +158,7 @@ section::before {
 }
 
 
-#signin-username, #usermail, #signin-password, #reply-password {
+#signup-username, #usermail, #signup-password, #reply-password {
     font-family: "Lato";
     font-weight: 300;
     border: none;
@@ -167,15 +167,15 @@ section::before {
     background-color: #d8f6de;
 }
 
-.signin-email {
+.signup-email {
     padding-left: 23px;
 }
 
-.signin-password {
+.signup-password {
     padding-left: 2px;
 }
 
-.signin-reply-password {
+.signup-reply-password {
     position: relative;
     right: 15px;
 }
