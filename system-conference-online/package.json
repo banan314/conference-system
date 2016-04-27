@@ -1,7 +1,7 @@
 {
-  "name": "node-js-getting-started",
+  "name": "conference-system",
   "version": "0.2.5",
-  "description": "A sample Node.js app using Express 4",
+  "description": "conference system online using Node.js and heroku",
   "engines": {
     "node": "5.9.1"
   },
@@ -16,13 +16,14 @@
     "debug": "~2.2.0",
     "express": "~4.13.1",
     "jade": "~1.11.0",
+	"ejs": "2.4.1",
     "morgan": "~1.6.1",
     "serve-favicon": "~2.3.0",
     "pg": "4.x"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/heroku/node-js-getting-started.git"
+    "url": "git+https://github.com/Aideann/system-konferencji.git"
   },
   "keywords": [
     "node",
@@ -30,10 +31,6 @@
     "express"
   ],
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/heroku/node-js-getting-started/issues"
-  },
-  "homepage": "https://github.com/heroku/node-js-getting-started#readme",
-  "devDependencies": {},
+  "readme": "https://github.com/Aideann/system-konferencji#readme",
   "author": ""
 }
