@@ -28,15 +28,6 @@ or
 
 [![Deploy to Heroku](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy)
 
-##Push local changes
-
-```
-$ npm install 
-$ git add .
-$ git commit -m "Demo"
-$ git push heroku master
-```
-
 ## Documentation
 
 For more information about using Node.js on Heroku, see these Dev Center articles:

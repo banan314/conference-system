@@ -32,12 +32,12 @@ app.use('/', routes);
 app.use('/users', users);
 
 app.set('view engine', 'ejs');
-var connectionString = process.env.DATABASE_URL;
+var connectionString = process.env.DATABASE_URL2;
 app.get('/db', function (request, response) {
   pg.connect(connectionString, function(err, client, done) {
 	if(err)
 	{ console.error(err); response.send("Can't connect to a database" + err); return;}
-    client.query('SELECT * FROM test_users', function(err, result) {
+    client.query('SELECT * FROM users', function(err, result) {
       done();
       if (err)
        { console.error(err); response.send("Error " + err); }
