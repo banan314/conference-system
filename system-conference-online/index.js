@@ -10,6 +10,11 @@ var users = require('./routes/users');
 var app = express();
 var pg = require('pg');
 
+
+var passport = require('passport');
+var passportLocal = require('passport-local');
+var expressSession = require('express-session');
+
 app.set('port', (process.env.PORT || 5000));
 
 app.use(express.static(__dirname + '/public'));
@@ -18,8 +23,55 @@ app.use(express.static(__dirname + '/public'));
 app.set('views', __dirname + '/views');
 app.set('view engine', 'jade');
 
+// Authenticator
+//app.use(express.basicAuth('john', 'doe');
+
+app.use(passport.initialize());
+app.use(passport.session());
+
+var connectionString = process.env.DATABASE_URL2;
+passport.use(new passportLocal.Strategy(function(username, password, done) {
+	/* pg.connect(connectionString, function(err, client, done) {
+		if(err)
+		{ console.error(err); response.send("Can't connect to a database" + err); return;}
+		var userCredentials;
+		client.query('SELECT * FROM users WHERE ', function(err, result) {
+		done();
+		if (err)
+		{ console.error(err); response.send("Error " + err); }
+		else { 
+			userCredentials = result;
+		}
+		});
+	}); */
+	//if(userCredentials == '') //or null, what is returned by SELECT?
+	if(username == password)
+		done(null, {id: 100, first_name: Janush, last_name: Kovalsky});
+	else
+		done(null, null);
+}));
+
+//process.env.SESSION_SECRET || 'latwo'
+app.use(expressSession({
+	secret: 'latwo studios',
+	resave: false,
+	saveUninitialized: false
+}));
+
 app.get('/', function(request, response) {
-  response.render('index')
+  response.render('index', {
+	isAuthenticated: false,
+	user: req.user,
+	userType: null
+  });
+});
+
+app.get('/login', function(req, res) {
+	res.render('login');
+});
+
+app.post('/login', passport.authenticate('local'), function(req, res) {
+	res.redirect('/');
 });
 
 app.use(logger('dev'));
@@ -32,7 +84,6 @@ app.use('/', routes);
 app.use('/users', users);
 
 app.set('view engine', 'ejs');
-var connectionString = process.env.DATABASE_URL2;
 app.get('/db', function (request, response) {
   pg.connect(connectionString, function(err, client, done) {
 	if(err)

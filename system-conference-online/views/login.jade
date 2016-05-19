@@ -1,0 +1,27 @@
+html
+  body
+    b As a username please put your first & last name separeted by a space!
+    form.form-horizontal
+      .form-group
+        label.labels(for='username') username:
+        input#username(name='username', type='text', required='')
+      .form-group
+        label.labels(for='password') password:
+        input#password(type='password', name='password', required='')
+      .form-group
+        input#login(type='submit', value='log me in')
+    form.form-horizontal
+      .form-group
+        label.labels(for='signup-username') username:
+        input#signup-username(type='text', name='username', required='')
+      .form-group
+        label.labels.signup-email(for='usermail') e-mail:
+        input#usermail(type='email', name='email', required='')
+      .form-group
+        label.labels.signup-password(for='signup-password') password:
+        input#signup-password(type='password', name='password', required='')
+      .form-group
+        label.labels.signup-reply-password(for='reply-password') reply password:
+        input#reply-password.signup-reply-password(type='password', name='reply-password', required='')
+      .form-group
+        input#register(type='submit', value='register me')
