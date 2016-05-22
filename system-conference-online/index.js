@@ -9,11 +9,13 @@ var routes = require('./routes/index');
 var users = require('./routes/users');
 var app = express();
 var pg = require('pg');
-
-
-var passport = require('passport');
-var passportLocal = require('passport-local');
+var flash = require('connect-flash');
 var expressSession = require('express-session');
+var passport = require('passport');
+
+require('./config/passport.js');
+
+var connectionString = process.env.DATABASE_URL2;
 
 app.set('port', (process.env.PORT || 5000));
 
@@ -26,30 +28,8 @@ app.set('view engine', 'jade');
 // Authenticator
 //app.use(express.basicAuth('john', 'doe');
 
-app.use(passport.initialize());
-app.use(passport.session());
+app.use(flash());
 
-var connectionString = process.env.DATABASE_URL2;
-passport.use(new passportLocal.Strategy(function(username, password, done) {
-	/* pg.connect(connectionString, function(err, client, done) {
-		if(err)
-		{ console.error(err); response.send("Can't connect to a database" + err); return;}
-		var userCredentials;
-		client.query('SELECT * FROM users WHERE ', function(err, result) {
-		done();
-		if (err)
-		{ console.error(err); response.send("Error " + err); }
-		else { 
-			userCredentials = result;
-		}
-		});
-	}); */
-	//if(userCredentials == '') //or null, what is returned by SELECT?
-	if(username == password)
-		done(null, {id: 100, first_name: Janush, last_name: Kovalsky});
-	else
-		done(null, null);
-}));
 
 //process.env.SESSION_SECRET || 'latwo'
 app.use(expressSession({
@@ -57,22 +37,6 @@ app.use(expressSession({
 	resave: false,
 	saveUninitialized: false
 }));
-
-app.get('/', function(request, response) {
-  response.render('index', {
-	isAuthenticated: false,
-	user: req.user,
-	userType: null
-  });
-});
-
-app.get('/login', function(req, res) {
-	res.render('login');
-});
-
-app.post('/login', passport.authenticate('local'), function(req, res) {
-	res.redirect('/');
-});
 
 app.use(logger('dev'));
 app.use(bodyParser.json());
@@ -82,6 +46,33 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
 app.use('/users', users);
+
+
+//main page
+app.get('/', function(request, response) {
+  response.render('index',
+  {
+	isAuthenticated: false,
+	user: request.user
+	//userType: null
+  });
+});
+
+//login page
+app.get('/login', function(req, res) {
+	res.render('login');
+});
+
+app.post('/login', passport.authenticate('local',{	successRedirect: '/',
+												   failureRedirect: '/login',
+												   failureFlash: true })
+);
+
+//register page
+app.get('/register', function(req, res) {
+	res.render('register');
+});
+
 
 app.set('view engine', 'ejs');
 app.get('/db', function (request, response) {

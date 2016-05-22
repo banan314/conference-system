@@ -1,0 +1,17 @@
+html
+  body
+    form.form-horizontal(method='post')
+      .form-group
+        label.labels(for='signup-username') username:
+        input#signup-username(type='text', name='username', required='')
+      .form-group
+        label.labels.signup-email(for='usermail') e-mail:
+        input#usermail(type='email', name='email', required='')
+      .form-group
+        label.labels.signup-password(for='signup-password') password:
+        input#signup-password(type='password', name='password', required='')
+      .form-group
+        label.labels.signup-reply-password(for='reply-password') reply password:
+        input#reply-password.signup-reply-password(type='password', name='reply-password', required='')
+      .form-group
+        input#register(type='submit', value='register me')
