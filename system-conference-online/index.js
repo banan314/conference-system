@@ -68,6 +68,12 @@ app.post('/login', passport.authenticate('local',{	successRedirect: '/',
 												   failureFlash: true })
 );
 
+//logout page
+app.get('/logout', function(req, res) {
+	req.logout(); 
+	res.redirect('/');
+});
+
 //register page
 app.get('/register', function(req, res) {
 	res.render('register');

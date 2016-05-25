@@ -30,9 +30,13 @@ passport.use(new passportLocal.Strategy(function(username, password, done) {
 		});
 	}); */
 	//if(userCredentials == '') //or null, what is returned by SELECT?
-	console.log(username + ' ' + password);
 	if(username == password)
+	{
 		done(null, passport.user);
+		//{id: username, name: username});
+	}
 	else
+	{
 		done(null, false, {message: 'Something wrong. Please don\'t hate me.'});
+	}
 }));
