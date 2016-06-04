@@ -4,7 +4,7 @@ html(lang='pl', xmlns='http://www.w3.org/1999/html')
     meta(charset='utf-8')
     meta(http-equiv='X-UA-Compatible', content='IE=edge')
     meta(name='viewport', content='width=device-width, initial-scale=1')
-    title Edycja konferencji
+    title Lista artykułów
     link(href='../css/bootstrap.min.css', rel='stylesheet')
     link(href='../css/stylesheet.css', rel='stylesheet')
     link(href='https://fonts.googleapis.com/css?family=Lato:400,300,700,900', rel='stylesheet', type='text/css')
@@ -15,11 +15,11 @@ html(lang='pl', xmlns='http://www.w3.org/1999/html')
     //  |     [endif]
   body
     div
-      | Lista konferencji:
+      | Lista artykułów:
       ul
-        each conf,i in conferenceList
-          li= conf.topic
+        each paper,i in [{'topic': 'bla1'}, {'topic': 'bla2'}] 
+          li= paper.topic
             input(type='checkbox' id='checkbox' + i)
     div
-      input(name='delete', type='button', value='Usuń')
-      input(name='rename', type='button', value='Zmień nazwę')
+      input(name='confirm', type='button', value='Zatwierdź')
+      input(name='reject', type='button', value='Odrzuć')
