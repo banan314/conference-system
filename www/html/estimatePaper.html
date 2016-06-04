@@ -1,0 +1,40 @@
+﻿<!DOCTYPE html>
+<html lang="pl" xmlns="http://www.w3.org/1999/html">
+
+<head>
+    <meta content="pl" http-equiv="Content-Language">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Oceń artykuł</title>
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../css/stylesheet.css" rel="stylesheet">
+    <link href='https://fonts.googleapis.com/css?family=Lato:400,300,700,900' rel='stylesheet' type='text/css'>
+    <!--[if lt IE 9]
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    [endif]-->
+</head>
+
+<body>
+	
+<p><strong>Oceń konferencję na podstawie następujacych kryteriów 
+(twoja ocena będzie widoczna przez autora artykułu): </strong></p>
+<form method="post">
+
+	<div><label id="Label1">Słowna ocena artykułu:</label>
+	<input name="estimation" type="text"></div>
+	<div><label id="Label2">Komentarz dla organizatora:</label>
+		<textarea cols="80" name="comment" rows="4"></textarea></div>
+	<div><label id="Label3">Zgodność artykułu z tematem konferencji (1-5):</label>
+	<input type="number" name="subjectMatch" min="1" max="5"></div>
+		</div><label id="Label4">Wartość merytoryczną artykułu (1-5):</label>
+		<input type="number" name="merValue" min="1" max="5"></div>
+	<div><label id="Label5">Werdykt:</label><select name="verdict">
+		<option value="0">artykuł przyjęty</option>
+		<option value="1">artykuł do zmodyfikowania</option>
+		<option value="2">artykuł odrzucony</option>
+		</select></div>
+	<input name="Submit1" type="submit" value="Prześlij ocenę" >
+</form>	
+</body>
