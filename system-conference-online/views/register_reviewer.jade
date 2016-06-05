@@ -21,11 +21,11 @@ html(lang='pl', xmlns='http://www.w3.org/1999/html')
     form(method='post')
       div
         label Zainteresowania: 
-        input(name='paperTopic')
+        input(name='paperTopic', required)
       div
         label#Label1 Doświadczenie:
-        input(name='experience', type='text')
+        input(name='experience', type='text', required)
       div
         label#Label2 Konferencja:
-        input(name='conference', type='text')
+        input(name='conference', type='text', required)
       input(name='paperSubmit', type='submit', value='Prześlij zgłoszenie')

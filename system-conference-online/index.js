@@ -58,6 +58,9 @@ app.get('/', function(request, response) {
   });
 });
 
+//------------------------------------------
+// login, register and logout
+//------------------------------------------
 //login page
 app.get('/login', function(req, res) {
 	res.render('log/login');
@@ -78,6 +81,7 @@ app.get('/logout', function(req, res) {
 app.get('/register', function(req, res) {
 	res.render('log/register');
 });
+//------------------------------------------
 
 app.get('/admin/paperlist', function(req, res) {
   pg.connect(connectionString, function(err, client, done) {
@@ -144,6 +148,81 @@ app.get('/reviewer/register', function(req, res) {
 app.get('/paper/register', function(req, res) {
 	res.render('registerPaper');
 });
+
+//POST requests for register paper, register reviewer, estimatePaper
+//------------------------------------------
+//add paper to the database
+app.post('/paper/register', function(req, res) {
+  pg.connect(connectionString, function(err, client, done) {
+	if(err)
+	{ 
+	  console.error(err); res.send("Can't connect to a database" + err); return;}
+	  client.query('INSERT INTO papers (topic, introduction, main_content,user_id) VALUES ($1,$2,$3,10)',
+	  [req.paperTopic, req.paperIntro, req.paperMainContent],
+	  function(err, result) {
+      done();
+      if (err)
+       { console.error(err); res.send("Error " + err); }
+      else
+       { res.redirect('back'); }
+    });
+  });
+});
+
+//add reviewer to the database
+app.post('/reviewer/register', function(req, res) {
+  pg.connect(connectionString, function(err, client, done) {
+	if(err)
+	{ 
+	  console.error(err); res.send("Can't connect to a database" + err); return;}
+	  client.query('INSERT INTO reviewers (knowledge_fields, user_id) VALUES ($1,10)',
+	  [req.experience],
+	  function(err, result) {
+      done();
+      if (err)
+       { console.error(err); res.send("Error " + err); }
+      else
+       { res.redirect('back'); }
+    });
+  });
+});
+
+//add a review to the database
+app.post('/estimatepaper', function(req, res) {
+  pg.connect(connectionString, function(err, client, done) {
+	if(err)
+	{ 
+	  console.error(err); res.send("Can't connect to a database" + err); return;}
+	  client.query('INSERT INTO reviews (opinion, comment_admin, topic_rate, content_rate, decision, reviewer_id, application_id) VALUES ($1,$2,$3,$4,$5, $6, $7)',
+	  [req.estimation, req.comment, req.subjectMatch, req.merValue, req.verdict, req.user_id, req.reviewer_id],
+	  function(err, result) {
+      done();
+      if (err)
+       { console.error(err); res.send("Error " + err); }
+      else
+       { res.redirect('back'); }
+    });
+  });
+});
+
+//add a new user to the database
+/* app.post('/register', function(req, res) {
+  pg.connect(connectionString, function(err, client, done) {
+	if(err)
+	{ 
+	  console.error(err); res.send("Can't connect to a database" + err); return;}
+	  client.query('INSERT INTO reviews (opinion, comment_admin, topic_rate, content_rate, decision, reviewer_id, application_id) VALUES ($1,$2,$3,$4,$5, $6, $7)',
+	  [req.estimation, req.comment, req.subjectMatch, req.merValue, req.verdict, req.user_id, req.reviewer_id],
+	  function(err, result) {
+      done();
+      if (err)
+       { console.error(err); res.send("Error " + err); }
+      else
+       { res.redirect('back'); }
+    });
+  });
+}); */
+//------------------------------------------
 
 //because db is written in ejs, we have to change the view engine temporarily
 app.set('view engine', 'ejs');

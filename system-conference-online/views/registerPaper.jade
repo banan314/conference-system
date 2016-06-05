@@ -16,20 +16,20 @@ html(lang='pl', xmlns='http://www.w3.org/1999/html')
       |     [endif]
   body
     p.h4
-      | Formularz zgłoszenia artykułu naukowego poł±czonego z przemówieniem na
+      | Formularz zgłoszenia artykułu naukowego połączonego z przemówieniem na
       | konferencje
     form(method='post')
       div
         label Temat artykułu:
-        input(name='paperTopic')
+        input(name='paperTopic', required)
       div
         label#Label1 Streszczenie:
-        input(name='paperIntro', type='file')
+        input(name='paperIntro', type='file', required)
         // paper introduction
       div
         label#Label2 Referat (main content):
-        input(name='paperMainContent', type='file')
-      div
-        label#Label3 Przewidywany czas trwania przemówienia (10-25min): 
-        input(name='speechTime', type='number', min='10', max='25')
+        input(name='paperMainContent', type='file', required)
+      //div
+        //label#Label3 Przewidywany czas trwania przemówienia (10-25min): 
+        //input(name='speechTime', type='number', min='10', max='25')
       input(name='paperSubmit', type='submit', value='Prześlij zgłoszenie')
