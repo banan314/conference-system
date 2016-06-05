@@ -76,19 +76,19 @@ app.get('/logout', function(req, res) {
 
 //register page
 app.get('/register', function(req, res) {
-	res.render('register');
+	res.render('log/register');
 });
 
 app.get('/admin/paperlist', function(req, res) {
   pg.connect(connectionString, function(err, client, done) {
 	if(err)
-	{ console.error(err); response.send("Can't connect to a database" + err); return;}
+	{ console.error(err); res.send("Can't connect to a database" + err); return;}
     client.query('SELECT * FROM papers', function(err, result) {
       done();
       if (err)
-       { console.error(err); response.send("Error " + err); }
+       { console.error(err); res.send("Error " + err); }
       else
-       { response.render('admin/admin_paperlist', {paperList: result.rows} ); }
+       { res.render('admin/admin_paperList', {paperList: result.rows} ); }
     });
   });
 });
@@ -100,13 +100,13 @@ app.get('/admin/menu', function(req, res) {
 app.get('/editconference', function(req, res) {
   pg.connect(connectionString, function(err, client, done) {
 	if(err)
-	{ console.error(err); response.send("Can't connect to a database" + err); return;}
+	{ console.error(err); res.send("Can't connect to a database" + err); return;}
     client.query('SELECT * FROM conferences', function(err, result) {
       done();
       if (err)
-       { console.error(err); response.send("Error " + err); }
+       { console.error(err); res.send("Error " + err); }
       else
-       { response.render('conferenceEdition', {conferenceList: result.rows} ); }
+       { res.render('conferenceEdition', {conferenceList: result.rows} ); }
     });
   });
 });
@@ -126,13 +126,13 @@ app.get('/pay', function(req, res) {
 app.get('/przeglad', function(req, res) {
   pg.connect(connectionString, function(err, client, done) {
 	if(err)
-	{ console.error(err); response.send("Can't connect to a database" + err); return;}
+	{ console.error(err); res.send("Can't connect to a database" + err); return;}
     client.query('SELECT * FROM conferences', function(err, result) {
       done();
       if (err)
-       { console.error(err); response.send("Error " + err); }
+       { console.error(err); res.send("Error " + err); }
       else
-       { response.render('przeglad', {conferenceList: result.rows} ); }
+       { res.render('przeglad', {conferenceList: result.rows} ); }
     });
   });
 });
