@@ -153,12 +153,15 @@ app.get('/paper/register', function(req, res) {
 //------------------------------------------
 //add paper to the database
 app.post('/paper/register', function(req, res) {
+/* 	console.log('POST service ' + req.body.paperTopic);
+	res.redirect('back'); */
   pg.connect(connectionString, function(err, client, done) {
 	if(err)
 	{ 
 	  console.error(err); res.send("Can't connect to a database" + err); return;}
-	  client.query('INSERT INTO papers (topic, introduction, main_content,user_id) VALUES ($1,$2,$3,10)',
-	  [req.paperTopic, req.paperIntro, req.paperMainContent],
+	  //client.query('INSERT INTO papers (topic, introduction, main_content,user_id) VALUES ($1,$2,$3,10)',
+	  client.query('INSERT INTO papers (topic, introdution, main_content,user_id) VALUES ($1,$2,$3,10)',
+	  [req.body.paperTopic, req.body.paperIntro, req.body.paperMainContent],
 	  function(err, result) {
       done();
       if (err)
@@ -176,7 +179,7 @@ app.post('/reviewer/register', function(req, res) {
 	{ 
 	  console.error(err); res.send("Can't connect to a database" + err); return;}
 	  client.query('INSERT INTO reviewers (knowledge_fields, user_id) VALUES ($1,10)',
-	  [req.experience],
+	  [req.body.experience],
 	  function(err, result) {
       done();
       if (err)
@@ -194,7 +197,7 @@ app.post('/estimatepaper', function(req, res) {
 	{ 
 	  console.error(err); res.send("Can't connect to a database" + err); return;}
 	  client.query('INSERT INTO reviews (opinion, comment_admin, topic_rate, content_rate, decision, reviewer_id, application_id) VALUES ($1,$2,$3,$4,$5, $6, $7)',
-	  [req.estimation, req.comment, req.subjectMatch, req.merValue, req.verdict, req.user_id, req.reviewer_id],
+	  [req.body.estimation, req.body.comment, req.body.subjectMatch, req.body.merValue, req.body.verdict, req.body.user_id, req.body.reviewer_id],
 	  function(err, result) {
       done();
       if (err)

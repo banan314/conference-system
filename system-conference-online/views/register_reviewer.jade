@@ -18,7 +18,7 @@ html(lang='pl', xmlns='http://www.w3.org/1999/html')
     p.h4
       | Formularz zgłoszenia chęci recenzowania artykułu naukowego na
       | konferencji
-    form(method='post')
+    form(method='post', action='/reviewer/register')
       div
         label Zainteresowania: 
         input(name='paperTopic', required)

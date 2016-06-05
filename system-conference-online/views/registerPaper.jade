@@ -18,7 +18,7 @@ html(lang='pl', xmlns='http://www.w3.org/1999/html')
     p.h4
       | Formularz zgłoszenia artykułu naukowego połączonego z przemówieniem na
       | konferencje
-    form(method='post')
+    form(method='post', action='/paper/register')
       div
         label Temat artykułu:
         input(name='paperTopic', required)

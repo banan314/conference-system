@@ -19,7 +19,7 @@ html(lang='pl', xmlns='http://www.w3.org/1999/html')
       strong
         | Oceń artykuł na podstawie następujacych kryteriów
         | (twoja ocena będzie widoczna przez autora artykułu):
-    form(method='post')
+    form(method='post', action='/estimatepaper')
       div
         label#Label1 Słowna ocena artykułu:
         input(name='estimation', type='text', required)
