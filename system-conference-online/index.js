@@ -155,13 +155,14 @@ app.get('/paper/register', function(req, res) {
 app.post('/paper/register', function(req, res) {
 /* 	console.log('POST service ' + req.body.paperTopic);
 	res.redirect('back'); */
+	var randomID = Math.floor((Math.random() * 10000) + 21);
   pg.connect(connectionString, function(err, client, done) {
 	if(err)
 	{ 
 	  console.error(err); res.send("Can't connect to a database" + err); return;}
 	  //client.query('INSERT INTO papers (topic, introduction, main_content,user_id) VALUES ($1,$2,$3,10)',
-	  client.query('INSERT INTO papers (topic, introdution, main_content,user_id) VALUES ($1,$2,$3,10)',
-	  [req.body.paperTopic, req.body.paperIntro, req.body.paperMainContent],
+	  client.query('INSERT INTO papers (topic, introdution, main_content,user_id, id) VALUES ($1,$2,$3,10,$4)',
+	  [req.body.paperTopic, req.body.paperIntro, req.body.paperMainContent,randomID],
 	  function(err, result) {
       done();
       if (err)
@@ -174,12 +175,13 @@ app.post('/paper/register', function(req, res) {
 
 //add reviewer to the database
 app.post('/reviewer/register', function(req, res) {
+	var randomID = Math.floor((Math.random() * 10000) + 21);
   pg.connect(connectionString, function(err, client, done) {
 	if(err)
 	{ 
 	  console.error(err); res.send("Can't connect to a database" + err); return;}
-	  client.query('INSERT INTO reviewers (knowledge_fields, user_id) VALUES ($1,10)',
-	  [req.body.experience],
+	  client.query('INSERT INTO reviewers (knowledge_fields, user_id, id) VALUES ($1,10,$2)',
+	  [req.body.experience,randomID],
 	  function(err, result) {
       done();
       if (err)
@@ -192,6 +194,7 @@ app.post('/reviewer/register', function(req, res) {
 
 //add a review to the database
 app.post('/estimatepaper', function(req, res) {
+	var randomID = Math.floor((Math.random() * 10000) + 21);
   pg.connect(connectionString, function(err, client, done) {
 	if(err)
 	{ 
