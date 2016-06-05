@@ -18,15 +18,20 @@ $ npm start
 Your app should now be running on [localhost:5000](http://localhost:5000/).
 
 ## Deploying to Heroku
-
-```
+if the app has not been created yet, type
+`
 $ heroku create
+`
+Otherwise go to the directory where you have your app and:
+```
+$ npm install
+$ git add .
+$ git commit -m "Demo"
 $ git push heroku master
 $ heroku open
 ```
-or
-
-[![Deploy to Heroku](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy)
+or follow those steps:
+[![Deploy to Heroku](https://devcenter.heroku.com/articles/getting-started-with-nodejs#deploy-the-app)]
 
 ## Documentation
 

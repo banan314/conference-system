@@ -50,7 +50,7 @@ app.use('/users', users);
 
 //main page
 app.get('/', function(request, response) {
-  response.render('index',
+  response.render('index.jade',
   {
 	isAuthenticated: false,
 	user: request.user
@@ -60,7 +60,7 @@ app.get('/', function(request, response) {
 
 //login page
 app.get('/login', function(req, res) {
-	res.render('login');
+	res.render('log/login');
 });
 
 app.post('/login', passport.authenticate('local',{	successRedirect: '/',
@@ -79,7 +79,73 @@ app.get('/register', function(req, res) {
 	res.render('register');
 });
 
+app.get('/admin/paperlist', function(req, res) {
+  pg.connect(connectionString, function(err, client, done) {
+	if(err)
+	{ console.error(err); response.send("Can't connect to a database" + err); return;}
+    client.query('SELECT * FROM papers', function(err, result) {
+      done();
+      if (err)
+       { console.error(err); response.send("Error " + err); }
+      else
+       { response.render('admin/admin_paperlist', {paperList: result.rows} ); }
+    });
+  });
+});
 
+app.get('/admin/menu', function(req, res) {
+	res.render('admin/menuAdmin');
+});
+
+app.get('/editconference', function(req, res) {
+  pg.connect(connectionString, function(err, client, done) {
+	if(err)
+	{ console.error(err); response.send("Can't connect to a database" + err); return;}
+    client.query('SELECT * FROM conferences', function(err, result) {
+      done();
+      if (err)
+       { console.error(err); response.send("Error " + err); }
+      else
+       { response.render('conferenceEdition', {conferenceList: result.rows} ); }
+    });
+  });
+});
+
+app.get('/estimatepaper', function(req, res) {
+	res.render('estimatePaper');
+});
+
+app.get('/participant/menu', function(req, res) {
+	res.render('menuParticipant');
+});
+
+app.get('/pay', function(req, res) {
+	res.render('pay');
+});
+
+app.get('/przeglad', function(req, res) {
+  pg.connect(connectionString, function(err, client, done) {
+	if(err)
+	{ console.error(err); response.send("Can't connect to a database" + err); return;}
+    client.query('SELECT * FROM conferences', function(err, result) {
+      done();
+      if (err)
+       { console.error(err); response.send("Error " + err); }
+      else
+       { response.render('przeglad', {conferenceList: result.rows} ); }
+    });
+  });
+});
+
+app.get('/reviewer/register', function(req, res) {
+	res.render('register_reviewer');
+});
+
+app.get('/paper/register', function(req, res) {
+	res.render('registerPaper');
+});
+
+//because db is written in ejs, we have to change the view engine temporarily
 app.set('view engine', 'ejs');
 app.get('/db', function (request, response) {
   pg.connect(connectionString, function(err, client, done) {
@@ -94,8 +160,8 @@ app.get('/db', function (request, response) {
     });
   });
 });
-
 app.set('view engine', 'jade');
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
