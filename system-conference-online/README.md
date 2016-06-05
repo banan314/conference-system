@@ -30,8 +30,9 @@ $ git commit -m "Demo"
 $ git push heroku master
 $ heroku open
 ```
-or follow those steps:
-[![Deploy to Heroku](https://devcenter.heroku.com/articles/getting-started-with-nodejs#deploy-the-app)]
+In order to get it working, you must have at least 1 dyno. To check it, `heroku ps`; to change it, `heroku ps:scale web=1`. Troubleshooting: `heroku logs --tail`.
+Find out more here:
+[![Deploy to Heroku](https://www.herokucdn.com/deploy/button.png)](https://devcenter.heroku.com/articles/getting-started-with-nodejs#deploy-the-app)
 
 ## Documentation
 
