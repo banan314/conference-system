@@ -1,22 +1,6 @@
-﻿doctype html
-html(lang='pl', xmlns='http://www.w3.org/1999/html')
-  head
-    meta(content='pl', http-equiv='Content-Language')
-    meta(charset='utf-8')
-    meta(http-equiv='X-UA-Compatible', content='IE=edge')
-    meta(name='viewport', content='width=device-width, initial-scale=1')
-    title Menu
-    link(href='../css/bootstrap.min.css', rel='stylesheet')
-    link(href='../css/stylesheet.css', rel='stylesheet')
-    //if lt IE 9
-      | [if lt IE 9]
-      script(src='https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js')
-      script(src='https://oss.maxcdn.com/respond/1.4.2/respond.min.js')
-      |     [endif]
-  body
-    p.h4 Menu
-    div
-      input(name='Przeglad', type='button', value='Przeglądaj konferencje')
-      input(name='registerArticle', type='button', value='Zgłoś Artykuł')
-      input(name='Zaplata', type='button', value='Do zapłaty')
-      input(name='PayButton', type='button', value='Zgłoś chęć zostania recenzentem')
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/html" lang="pl"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8"><meta content="pl" http-equiv="Content-Language"><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Menu</title><link href="Menu2_pliki/bootstrap.css" rel="stylesheet"><link href="Menu2_pliki/stylesheet.css" rel="stylesheet"><!--if lt IE 9| [if lt IE 9]
+script(src='https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js')
+script(src='https://oss.maxcdn.com/respond/1.4.2/respond.min.js')
+|     [endif]--></head><body><p class="h4">Menu</p><div><form action="https://system-conference-online.herokuapp.com/przeglad"><input name="Przeglad" value="Przeglądaj konferencje" type="submit"></form><form action= "https://system-conference-online.herokuapp.com/paper/register"><input name="registerArticle" value="Zgłoś Artykuł" type="submit"></form><form action= "https://system-conference-online.herokuapp.com/pay"><input name="Zaplata" value="Do zapłaty" type="submit"></form><form action= "https://system-conference-online.herokuapp.com/reviewer/register"><input name="registerreviewer" value="Zgłoś chęć zostania recenzentem" type="submit"></form></div></body></html>
