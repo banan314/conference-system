@@ -212,22 +212,23 @@ app.post('/estimatepaper', function(req, res) {
 });
 
 //add a new user to the database
-/* app.post('/register', function(req, res) {
+app.post('/register', function(req, res) {
+	var randomID = Math.floor((Math.random() * 10000) + 21);
   pg.connect(connectionString, function(err, client, done) {
 	if(err)
 	{ 
 	  console.error(err); res.send("Can't connect to a database" + err); return;}
-	  client.query('INSERT INTO reviews (opinion, comment_admin, topic_rate, content_rate, decision, reviewer_id, application_id) VALUES ($1,$2,$3,$4,$5, $6, $7)',
-	  [req.estimation, req.comment, req.subjectMatch, req.merValue, req.verdict, req.user_id, req.reviewer_id],
+	  client.query('INSERT INTO users (first_name, last_name, email, password_enc, id) VALUES ($1,$2,$3,$4,$5)',
+	  [req.body.signup_username, req.body.signup_username, req.body.usermail, req.body.signup_password, randomID],
 	  function(err, result) {
       done();
       if (err)
        { console.error(err); res.send("Error " + err); }
       else
-       { res.redirect('back'); }
+       { res.redirect('/'); }
     });
   });
-}); */
+}); 
 //------------------------------------------
 
 //because db is written in ejs, we have to change the view engine temporarily
