@@ -1,6 +1,11 @@
 html
+  head
+    title Zarejestruj sie
+    //link(href='/css/bootstrap.min.css', rel='stylesheet')
+    //link(href='/css/stylesheet.css', rel='stylesheet')
+    link(rel='stylesheet' href='/css/form_layout.css')
   body
-    form.form-horizontal(method='post')
+    form.form-horizontal(method='post', action='/register')
       .form-group
         label.labels(for='signup-username') username:
         input#signup_username(type='text', name='username', required='')

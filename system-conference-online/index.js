@@ -219,7 +219,7 @@ app.post('/register', function(req, res) {
 	{ 
 	  console.error(err); res.send("Can't connect to a database" + err); return;}
 	  client.query('INSERT INTO users (first_name, last_name, email, password_enc, id) VALUES ($1,$2,$3,$4,$5)',
-	  [req.body.signup_username, req.body.signup_username, req.body.usermail, req.body.signup_password, randomID],
+	  [req.body.username, req.body.username, req.body.email, req.body.password, randomID],
 	  function(err, result) {
       done();
       if (err)
