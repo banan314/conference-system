@@ -1,92 +1,85 @@
-doctype html
-html
-  head
-    title System konefencji online
-    meta(charset='utf-8')
-    meta(http-equiv='X-UA-Compatible', content='IE=edge')
-    meta(name='viewport', content='width=device-width, initial-scale=1')
-    link(rel='stylesheet', href='/css/bootstrap.min.css')
-    link(rel='stylesheet', href='/css/stylesheet.css')
-    link(rel='stylesheet', href='https://fonts.googleapis.com/css?family=Lato:400,300,700,900', type='text/css')
-  body
-    header
-      .header-container
-        img.img-responsive(src='/src/logo.png', alt='logo')
-        p.page-name Conference
-        p.page-name-description online system
-    .container
-      nav
-        div
-          ul
-            li
-              a(href='/admin/paperlist') artykuły (admin)!
-            li
-              a(href='/admin/menu') Menu (admin)
-            li
-              a(href='/editconference') Edycja konferencji!
-            li
-              a(href='/estimatepaper') Ocena artykułu#
-            li
-              a(href='/participant/menu') Menu (uczestnik)
-            li
-              a(href='/pay') Płacę
-            li
-              a(href='/przeglad') Przegląd konferencji!
-            li
-              a(href='/reviewer/register') Zarejestruj recenzenta#
-            li
-              a(href='/paper/register') Zarejestruj artykuł#
-      section
-        .row.login-column
-          .col-lg-8.login-container
-            h3.registration-header
-              a(href='login') LOG IN
-          .col-lg-4.info-container
-            p.about-acc
-              | 
-        .row.registration-column
-          .col-lg-8.registration-container
-            h3.registration-header
-              a(href='register') SIGN UP
-          .col-lg-4.registration-image
-      section
-        .row
-          .col-lg-4.cloud
-            div(style='float:left;clear:left;height:15px;width:37px')
-            div(style='float:right;clear:right;height:15px;width:67px')
-            div(style='float:left;clear:left;height:15px;width:9px')
-            div(style='float:right;clear:right;height:15px;width:60px')
-            div(style='float:left;clear:left;height:15px;width:2px')
-            div(style='float:right;clear:right;height:15px;width:53px')
-            div(style='float:left;clear:left;height:15px;width:3px')
-            div(style='float:right;clear:right;height:15px;width:52px')
-            div(style='float:left;clear:left;height:15px;width:13px')
-            div(style='float:right;clear:right;height:15px;width:62px')
-            div(style='float:left;clear:left;height:15px;width:28px')
-            div(style='float:right;clear:right;height:15px;width:72px')
-            div(style='float:left;clear:left;height:15px;width:0px')
-            div(style='float:right;clear:right;height:15px;width:0px')
-            div(style='float:left;clear:left;height:15px;width:0px')
-            div(style='float:right;clear:right;height:15px;width:0px')
-            div(style='float:left;clear:left;height:15px;width:0px')
-            div(style='float:right;clear:right;height:15px;width:0px')
-            q
-              | Dobra komunikacja pobudza jak czarna kawa. I równie trudno po niej zasnąć. – Ann Morrow Lindbergh
-          article.col-lg-8.about-project
-          h3.about-project-tittle Słów kilka na temat projektu...
-            p.about-project-first-text
-              | Niniejszy projekt jest sytemem do obsługi konferencji. Obsługuje on Administratorów, recenzentów jak i uczestników.
-            p.about-project-second-text
-              | System korzysta z technologii takich jak HTML5, Node.js, PostgreSQL, JADE, Bootstrap, JavaScript, CSS.
-      section
-        footer
-          .row.footer-website
-            .col-lg-10.footer-container
-              ul.footer-nav
-                  ul.footer-nav
-                li
-                  a(href='', title='Przenieś do góry strony') Do góry
-                li
-                  a(href='', title='Kontakt z właścicielami') Kontakt
-                li
-                  a(href='', title='O Autorach') Autorzy
+extends layout
+
+block content
+  header
+    .header-container
+      img.img-responsive(src='/src/logo.png', alt='logo')
+      p.page-name Conference
+      p.page-name-description online system
+    a(href='/logout') Wyloguj się
+  .container
+    nav
+      div
+        ul
+          li
+            a(href='/admin/paperlist') artykuły (admin)!
+          li
+            a(href='/admin/menu') Menu (admin)
+          li
+            a(href='/editconference') Edycja konferencji!
+          li
+            a(href='/estimatepaper') Ocena artykułu#
+          li
+            a(href='/participant/menu') Menu (uczestnik)
+          li
+            a(href='/pay') Płacę
+          li
+            a(href='/przeglad') Przegląd konferencji!
+          li
+            a(href='/reviewer/register') Zarejestruj recenzenta#
+          li
+            a(href='/paper/register') Zarejestruj artykuł#
+    section
+      .row.login-column
+        .col-lg-8.login-container
+          h3.registration-header
+            a(href='login') LOG IN
+        .col-lg-4.info-container
+          p.about-acc
+            | 
+      .row.registration-column
+        .col-lg-8.registration-container
+          h3.registration-header
+            a(href='register') SIGN UP
+        .col-lg-4.registration-image
+    section
+      .row
+        .col-lg-4.cloud
+          div(style='float:left;clear:left;height:15px;width:37px')
+          div(style='float:right;clear:right;height:15px;width:67px')
+          div(style='float:left;clear:left;height:15px;width:9px')
+          div(style='float:right;clear:right;height:15px;width:60px')
+          div(style='float:left;clear:left;height:15px;width:2px')
+          div(style='float:right;clear:right;height:15px;width:53px')
+          div(style='float:left;clear:left;height:15px;width:3px')
+          div(style='float:right;clear:right;height:15px;width:52px')
+          div(style='float:left;clear:left;height:15px;width:13px')
+          div(style='float:right;clear:right;height:15px;width:62px')
+          div(style='float:left;clear:left;height:15px;width:28px')
+          div(style='float:right;clear:right;height:15px;width:72px')
+          div(style='float:left;clear:left;height:15px;width:0px')
+          div(style='float:right;clear:right;height:15px;width:0px')
+          div(style='float:left;clear:left;height:15px;width:0px')
+          div(style='float:right;clear:right;height:15px;width:0px')
+          div(style='float:left;clear:left;height:15px;width:0px')
+          div(style='float:right;clear:right;height:15px;width:0px')
+          q
+            | Dobra komunikacja pobudza jak czarna kawa. I równie trudno po niej zasnąć. – Ann Morrow Lindbergh
+        article.col-lg-8.about-project
+        h3.about-project-tittle Słów kilka na temat projektu...
+          p.about-project-first-text
+            | Niniejszy projekt jest sytemem do obsługi konferencji. Obsługuje on Administratorów, recenzentów jak i uczestników.
+          p.about-project-second-text
+            | System korzysta z technologii takich jak HTML5, Node.js, PostgreSQL, JADE, Bootstrap, JavaScript, CSS.
+    section
+      footer
+        .row.footer-website
+          .col-lg-10.footer-container
+            ul.footer-nav
+                ul.footer-nav
+              li
+                a(href='', title='Przenieś do góry strony') Do góry
+              li
+                a(href='', title='Kontakt z właścicielami') Kontakt
+              li
+                a(href='', title='O Autorach') Autorzy

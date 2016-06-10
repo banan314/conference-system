@@ -13,7 +13,63 @@ var flash = require('connect-flash');
 var expressSession = require('express-session');
 var passport = require('passport');
 
-require('./config/passport.js');
+
+app.use(flash());
+
+
+//process.env.SESSION_SECRET || 'latwo'
+app.use(expressSession({
+	secret: 'latwo studios',
+	resave: false,
+	saveUninitialized: false
+}));
+
+var passport = require('passport');
+var passportLocal = require('passport-local');
+
+app.use(passport.initialize());
+app.use(passport.session());
+
+passport.serializeUser(function(user, done) {
+	//done(null, user.id);
+	done(null, user);
+});
+
+passport.deserializeUser(function(user, done) {
+	//query db or cache here
+	//done(null, {id: id, name: id});
+	done(null, user);
+});
+
+passport.use(new passportLocal.Strategy(function(username, password, done) {
+	console.log('hello, im in passport');
+	console.log(username);
+	/* pg.connect(connectionString, function(err, client, done) {
+		if(err)
+		{ console.error(err); response.send("Can't connect to a database" + err); return;}
+		var userCredentials;
+		client.query('SELECT * FROM users WHERE ', function(err, result) {
+		done();
+		if (err)
+		{ console.error(err); response.send("Error " + err); }
+		else { 
+			userCredentials = result;
+		}
+		});
+	}); */
+	//if(userCredentials == '') //or null, what is returned by SELECT?
+	if(username == password)
+	{
+		console.log('Correct! pass: ' + password + 'user: ' + username);
+		done(null, {username: username, password: password});
+		//{id: username, name: username});
+	}
+	else
+	{
+		console.log(password);
+		done(null, false, {message: 'Something wrong. Please don\'t hate me.'});
+	}
+}));
 
 var connectionString = process.env.DATABASE_URL2;
 
@@ -28,15 +84,6 @@ app.set('view engine', 'jade');
 // Authenticator
 //app.use(express.basicAuth('john', 'doe');
 
-app.use(flash());
-
-
-//process.env.SESSION_SECRET || 'latwo'
-app.use(expressSession({
-	secret: 'latwo studios',
-	resave: false,
-	saveUninitialized: false
-}));
 
 app.use(logger('dev'));
 app.use(bodyParser.json());
@@ -46,7 +93,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
 app.use('/users', users);
-
 
 //main page
 app.get('/', function(request, response) {
@@ -66,9 +112,11 @@ app.get('/login', function(req, res) {
 	res.render('log/login');
 });
 
-app.post('/login', passport.authenticate('local',{	successRedirect: '/',
+app.post('/login', passport.authenticate('local'),function(req,res) {
+	res.redirect('/');
+}/* {	successRedirect: '/',
 												   failureRedirect: '/login',
-												   failureFlash: true })
+												   failureFlash: true }) */
 );
 
 //logout page
@@ -247,6 +295,7 @@ app.get('/db', function (request, response) {
   });
 });
 app.set('view engine', 'jade');
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
