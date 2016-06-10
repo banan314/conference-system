@@ -43,20 +43,28 @@ passport.deserializeUser(function(user, done) {
 
 passport.use(new passportLocal.Strategy(function(username, password, done) {
 	console.log('hello, im in passport');
-	console.log(username);
-	/* pg.connect(connectionString, function(err, client, done) {
+	 pg.connect(connectionString, function(err, client, done) {
 		if(err)
 		{ console.error(err); response.send("Can't connect to a database" + err); return;}
 		var userCredentials;
-		client.query('SELECT * FROM users WHERE ', function(err, result) {
+		client.query('SELECT * FROM users WHERE first_name= ($1) AND password_enc=($2) ',
+		[uername, password],
+		function(err, result) {
 		done();
 		if (err)
 		{ console.error(err); response.send("Error " + err); }
 		else { 
-			userCredentials = result;
+			if(result.rows.length > 0) {
+				console.log('Correct! pass: ' + password + ' user: ' + username);
+				done(null, result.rows[0]);
+			}
+			else {
+				console.log('Incorrect! pass: ' + password + ' user: ' + username);
+				done(null, false, {message: 'Something wrong. Please don\'t hate me.'});
+			}
 		}
 		});
-	}); */
+	}); 
 	//if(userCredentials == '') //or null, what is returned by SELECT?
 	if(username == password)
 	{
