@@ -20,3 +20,6 @@ html(lang='en', xmlns='http://www.w3.org/1999/html')
     ul
       each conf in conferenceList
         li=  conf.topic
+      div
+      form(action='https://system-conference-online.herokuapp.com/participant/menu')
+        input(name='Powrot', value='Powrót', type='submit')
