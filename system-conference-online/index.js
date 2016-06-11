@@ -12,10 +12,20 @@ var pg = require('pg');
 var flash = require('connect-flash');
 var expressSession = require('express-session');
 var passport = require('passport');
+var passportLocal = require('passport-local');
 
+//global constants
+var connectionString = process.env.DATABASE_URL2;
 
 app.use(flash());
 
+//configure app
+//------------------------------------------------
+//app.use(express.static('public'));
+
+app.use(cookieParser());
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
 
 //process.env.SESSION_SECRET || 'latwo'
 app.use(expressSession({
@@ -24,31 +34,31 @@ app.use(expressSession({
 	saveUninitialized: false
 }));
 
-var passport = require('passport');
-var passportLocal = require('passport-local');
-
 app.use(passport.initialize());
 app.use(passport.session());
 
+//app.use(app.router);
+//------------------------------------------------
+
 passport.serializeUser(function(user, done) {
 	//done(null, user.id);
-	done(null, user);
+	done(null, user.id);
 });
 
-passport.deserializeUser(function(user, done) {
+passport.deserializeUser(function(id, done) {
 	//query db or cache here
-	//done(null, {id: id, name: id});
-	done(null, user);
-});
+	done(null, {id: id});
+	console
+ });
 
-passport.use(new passportLocal.Strategy(function(username, password, done) {
+passport.use(new passportLocal.Strategy(function(username, password, passportDone) {
 	console.log('hello, im in passport');
 	 pg.connect(connectionString, function(err, client, done) {
 		if(err)
 		{ console.error(err); response.send("Can't connect to a database" + err); return;}
 		var userCredentials;
-		client.query('SELECT * FROM users WHERE first_name= ($1) AND password_enc=($2) ',
-		[uername, password],
+		client.query('SELECT * FROM users WHERE first_name= $1 AND password_enc=$2',
+		[username, password],
 		function(err, result) {
 		done();
 		if (err)
@@ -56,17 +66,18 @@ passport.use(new passportLocal.Strategy(function(username, password, done) {
 		else { 
 			if(result.rows.length > 0) {
 				console.log('Correct! pass: ' + password + ' user: ' + username);
-				done(null, result.rows[0]);
+				console.log('id: ' + result.rows[0].id);
+				passportDone(null, {id: result.rows[0].id});
 			}
 			else {
 				console.log('Incorrect! pass: ' + password + ' user: ' + username);
-				done(null, false, {message: 'Something wrong. Please don\'t hate me.'});
+				passportDone(null, false, {message: 'Something wrong. Please don\'t hate me.'});
 			}
-		}
+		  }
 		});
 	}); 
-	//if(userCredentials == '') //or null, what is returned by SELECT?
-	if(username == password)
+  
+	/* if(username == password)
 	{
 		console.log('Correct! pass: ' + password + 'user: ' + username);
 		done(null, {username: username, password: password});
@@ -76,10 +87,9 @@ passport.use(new passportLocal.Strategy(function(username, password, done) {
 	{
 		console.log(password);
 		done(null, false, {message: 'Something wrong. Please don\'t hate me.'});
-	}
+	} */
 }));
 
-var connectionString = process.env.DATABASE_URL2;
 
 app.set('port', (process.env.PORT || 5000));
 
@@ -94,13 +104,21 @@ app.set('view engine', 'jade');
 
 
 app.use(logger('dev'));
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
 app.use('/users', users);
+
+function ensureAuthenticatedAdmin(req, res, next) {
+  console.log(req.isAuthenticated()); // false
+  if (req.isAuthenticated()) { 
+	return next(); 
+  }
+  else {
+	//res.redirect('/login');
+	res.send(403); //forbidden
+  }
+}
 
 //main page
 app.get('/', function(request, response) {
@@ -120,17 +138,38 @@ app.get('/login', function(req, res) {
 	res.render('log/login');
 });
 
-app.post('/login', passport.authenticate('local'),function(req,res) {
+app.post('/login', passport.authenticate('local'/* , { successRedirect: '/',
+                                   failureRedirect: '/login',
+                                   failureFlash: true } */), 
+	function(req, res) {
+	console.log('login post');
 	res.redirect('/');
-}/* {	successRedirect: '/',
-												   failureRedirect: '/login',
-												   failureFlash: true }) */
-);
+});
 
 //logout page
 app.get('/logout', function(req, res) {
-	req.logout(); 
-	res.redirect('/');
+	if ( req.isUnauthenticated() ) {
+        // you are not even logged in, wtf
+        res.redirect( '/' );
+        return;
+    }
+    var sessionCookie = req.cookies['connect.sid'];
+    if ( ! sessionCookie ) {
+        // nothing to do here
+        res.redirect( '/' );
+        return;
+    }
+    var sessionId = sessionCookie.split( '.' )[0].replace( 's:', '' );
+    /* thinky.r.db( 'test' ).table( 'session' ).get( sessionId ).delete().run().then( function( result ) {
+        if ( ! result.deleted ) {
+            // we did not manage to find session for this user
+            res.redirect( '/' );
+            return;
+        }
+        req.logout();
+        res.redirect( '/' );
+        return;
+    }); */
 });
 
 //register page
@@ -140,6 +179,9 @@ app.get('/register', function(req, res) {
 //------------------------------------------
 
 app.get('/admin/paperlist', function(req, res) {
+	if(req.user.id > 2) {
+		res.send(403);
+	} else
   pg.connect(connectionString, function(err, client, done) {
 	if(err)
 	{ console.error(err); res.send("Can't connect to a database" + err); return;}
