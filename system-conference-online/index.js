@@ -90,7 +90,6 @@ passport.use(new passportLocal.Strategy(function(username, password, passportDon
 	} */
 }));
 
-
 app.set('port', (process.env.PORT || 5000));
 
 app.use(express.static(__dirname + '/public'));
@@ -108,26 +107,85 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
 app.use('/users', users);
+//Do not let anyone but admins to the admin's pages.
+app.use('/admin', ensureAuthenticatedAdmin);
 
 function ensureAuthenticatedAdmin(req, res, next) {
   console.log(req.isAuthenticated()); // false
-  if (req.isAuthenticated()) { 
-	return next(); 
+  //admin is an user with id either in db or 5032
+  var isAdmin = false;
+  if (req.isAuthenticated() )  { 
+	console.log(req.user.id);
+	var isID;
+	pg.connect(connectionString, function(err, client, done) {
+		if(err)
+		{ console.error(err); res.send("Can't connect to a database" + err); return;}
+		client.query('SELECT * FROM administrators WHERE user_id=$1',
+		[req.user.id],
+		function(err, result) {
+		  done();
+		  if (err)
+		   { console.error(err); res.send("Error " + err); }
+		  else
+		   { isID = (result.rows.length) ; }
+		});
+	});
+	if ((isID > 0) || req.user.id == 5032) 
+		isAdmin = true; 
   }
+  
+  if (isAdmin)
+	return next();
   else {
 	//res.redirect('/login');
-	res.send(403); //forbidden
+	res.sendStatus(403); //forbidden
+  }
+}
+function ensureAuthenticated(req, res, next) {
+	if(req.isAuthenticated())
+		return next();
+	else
+		res.sendStatus(403);
+}
+function ensureAuthenticatedReviewer(req, res, next) {
+	console.log(req.isAuthenticated()); // false
+  //admin is an user with id either in db or 5032
+  var isReviewer = false;
+  if (req.isAuthenticated() )  { 
+	console.log(req.user.id);
+	var isID;
+	pg.connect(connectionString, function(err, client, done) {
+		if(err)
+		{ console.error(err); res.send("Can't connect to a database" + err); return;}
+		client.query('SELECT * FROM reviewers WHERE user_id=$1',
+		[req.user.id],
+		function(err, result) {
+		  done();
+		  if (err)
+		   { console.error(err); res.send("Error " + err); }
+		  else
+		   { isID = (result.rows.length) ; }
+		});
+	});
+	if ((isID > 0) || req.user.id == 5032) 
+		isReviewer = true; 
+  }
+  
+  if (isReviewer)
+	return next();
+  else {
+	//res.redirect('/login');
+	res.sendStatus(403); //forbidden
   }
 }
 
 //main page
 app.get('/', function(request, response) {
-  response.render('index.jade',
+  response.render('index.jade'/* ,
   {
 	isAuthenticated: false,
 	user: request.user
-	//userType: null
-  });
+  } */);
 });
 
 //------------------------------------------
@@ -160,16 +218,11 @@ app.get('/logout', function(req, res) {
         return;
     }
     var sessionId = sessionCookie.split( '.' )[0].replace( 's:', '' );
-    /* thinky.r.db( 'test' ).table( 'session' ).get( sessionId ).delete().run().then( function( result ) {
-        if ( ! result.deleted ) {
-            // we did not manage to find session for this user
-            res.redirect( '/' );
-            return;
-        }
-        req.logout();
-        res.redirect( '/' );
-        return;
-    }); */
+	
+	req.logout();
+	res.clearCookie('connect.sid');
+	res.redirect( '/' );
+	return;
 });
 
 //register page
@@ -178,10 +231,7 @@ app.get('/register', function(req, res) {
 });
 //------------------------------------------
 
-app.get('/admin/paperlist', function(req, res) {
-	if(req.user.id > 2) {
-		res.send(403);
-	} else
+app.get('/admin/paperlist',  function(req, res) {
   pg.connect(connectionString, function(err, client, done) {
 	if(err)
 	{ console.error(err); res.send("Can't connect to a database" + err); return;}
@@ -199,7 +249,8 @@ app.get('/admin/menu', function(req, res) {
 	res.render('admin/menuAdmin');
 });
 
-app.get('/editconference', function(req, res) {
+
+app.get('/editconference', ensureAuthenticatedAdmin, function(req, res) {
   pg.connect(connectionString, function(err, client, done) {
 	if(err)
 	{ console.error(err); res.send("Can't connect to a database" + err); return;}
@@ -213,7 +264,7 @@ app.get('/editconference', function(req, res) {
   });
 });
 
-app.get('/estimatepaper', function(req, res) {
+app.get('/estimatepaper', ensureAuthenticatedReviewer, function(req, res) {
 	res.render('estimatePaper');
 });
 
@@ -243,7 +294,7 @@ app.get('/reviewer/register', function(req, res) {
 	res.render('register_reviewer');
 });
 
-app.get('/paper/register', function(req, res) {
+app.get('/paper/register', ensureAuthenticated, function(req, res) {
 	res.render('registerPaper');
 });
 
