@@ -40,7 +40,10 @@ html(lang='pl', xmlns='http://www.w3.org/1999/html')
           //option(value='2') artykuł odrzucony
       div
         label#Label6 Id recenzenta:
-        input(type='number', name='user_id', min='3', max='20', required)
+        select(name='user_id', required)
+          option 3
+          option 7
+          option 15
       div
         label#Label7 Id zgłoszenia referatu:
         input(type='number', name='reviewer_id', min='1', max='7', required)
