@@ -1,4 +1,4 @@
-﻿doctype html
+doctype html
 html(lang='pl', xmlns='http://www.w3.org/1999/html')
   head
     meta(content='pl', http-equiv='Content-Language')
@@ -14,12 +14,11 @@ html(lang='pl', xmlns='http://www.w3.org/1999/html')
       script(src='https://oss.maxcdn.com/respond/1.4.2/respond.min.js')
       |     [endif]
   body
-    body
-      p.h4 Do zaplaty
-      form(method='post')
+    p.h4 Do zaplaty
+    form(method='post')
         p Oplata za nocleg: 30zl
         p Oplata za wstęp na konferenję: 50zl
+    div
         input(name='PayButton', type='submit', value='Uiść oplatę')
-      div
-        form(action='https://system-conference-online.herokuapp.com/participant/menu')
+      form(action='https://system-conference-online.herokuapp.com/participant/menu')
         input(name='Powrot', value='Powrót', type='submit')
