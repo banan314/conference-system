@@ -48,7 +48,6 @@ passport.serializeUser(function(user, done) {
 passport.deserializeUser(function(id, done) {
 	//query db or cache here
 	done(null, {id: id});
-	console
  });
 
 passport.use(new passportLocal.Strategy(function(username, password, passportDone) {
@@ -201,7 +200,12 @@ app.post('/login', passport.authenticate('local'/* , { successRedirect: '/',
                                    failureFlash: true } */), 
 	function(req, res) {
 	console.log('login post');
-	res.redirect('/');
+	if(req.user.id < 3 || req.user.id == 5032)
+		res.redirect('/admin/menu');
+	else if(req.user.id in [3,7,15])
+		res.redirect('/participant/menu')
+	else
+		res.redirect('/');
 });
 
 //logout page
@@ -251,17 +255,23 @@ app.get('/admin/menu', function(req, res) {
 
 
 app.get('/editconference', ensureAuthenticatedAdmin, function(req, res) {
-  pg.connect(connectionString, function(err, client, done) {
-	if(err)
-	{ console.error(err); res.send("Can't connect to a database" + err); return;}
-    client.query('SELECT * FROM conferences', function(err, result) {
-      done();
-      if (err)
-       { console.error(err); res.send("Error " + err); }
-      else
-       { res.render('conferenceEdition', {conferenceList: result.rows} ); }
+    pg.connect(connectionString, function (err, client, done) {
+        if (err) {
+            console.error(err);
+            res.send("Can't connect to a database" + err);
+            return;
+        }
+        client.query('SELECT * FROM conferences', function (err, result) {
+            done();
+            if (err) {
+                console.error(err);
+                res.send("Error " + err);
+            }
+            else{
+                res.render('conferenceEdition', {conferenceList: result.rows});
+            }
+        });
     });
-  });
 });
 
 app.get('/estimatepaper', ensureAuthenticatedReviewer, function(req, res) {
@@ -380,6 +390,40 @@ app.post('/register', function(req, res) {
   });
 }); 
 //------------------------------------------
+app.post('/admin/conference/delete', function (req,res) {
+   //delete the chosen conference
+    var fetchConferences;
+    var conferenceDAO;
+    pg.connect(connectionString, function (err, client, done) {
+        if (err) {
+            console.error(err);
+            res.send("Can't connect to a database" + err);
+            return;
+        }
+        client.query('SELECT * FROM conferences', function (err, result) {
+            done();
+            if (err) {
+                console.error(err);
+                res.send("Error " + err);
+            }
+            else{
+                fetchConferences = result.rows;
+            }
+        });
+        conferenceDAO = fetchConferences[req.body.conferenceNumber];
+        console.log(conferenceDAO.id);
+        /*client.query('DELETE FROM conferences WHERE id=$1',
+        [conferenceDAO.id],
+        function (err, result) {
+            done();
+            if (err) {
+                console.error(err);
+                res.send("Error " + err);
+            }
+        });*/
+    });
+    res.redirect('back');
+});
 
 //because db is written in ejs, we have to change the view engine temporarily
 app.set('view engine', 'ejs');
