@@ -16,12 +16,15 @@ html(lang='pl', xmlns='http://www.w3.org/1999/html')
   body
     div
       | Lista artykułów:
-      ul
+      ol
         each paper,i in paperList
           li= paper.topic
-            input(type='checkbox' id='checkbox' + i)
+            //input(type='checkbox' id='checkbox' + i)
     div
-      input(name='confirm', type='button', value='Zatwierdź')
-      input(name='reject', type='button', value='Odrzuć')
+      form(method='post', action='/admin/paper/delete')
+        input(type='number', min=1, max=15, name='paperNumber')
+        input(name='delete', type='submit', value='Odrzuć')
+      input(type='button', name='rename', value='Zatwierdź', onclick="getElementById('zmienNazwe').innerHTML='Artykuł zatwierdzony'")
+      p#zmienNazwe
     form(action='https://system-conference-online.herokuapp.com/admin/menu')
       input(name='Powrot', value='Powrót', type='submit')

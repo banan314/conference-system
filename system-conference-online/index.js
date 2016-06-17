@@ -146,11 +146,12 @@ function ensureAuthenticated(req, res, next) {
 	else
 		res.sendStatus(403);
 }
+
 function ensureAuthenticatedReviewer(req, res, next) {
 	console.log(req.isAuthenticated()); // false
   //admin is an user with id either in db or 5032
   var isReviewer = false;
-  if (req.isAuthenticated() )  { 
+  if (req.isAuthenticated() )  {
 	console.log(req.user.id);
 	var isID;
 	pg.connect(connectionString, function(err, client, done) {
@@ -166,10 +167,10 @@ function ensureAuthenticatedReviewer(req, res, next) {
 		   { isID = (result.rows.length) ; }
 		});
 	});
-	if ((isID > 0) || req.user.id == 5032) 
-		isReviewer = true; 
+	if ((isID > 0) || req.user.id == 5032)
+		isReviewer = true;
   }
-  
+
   if (isReviewer)
 	return next();
   else {
@@ -180,11 +181,11 @@ function ensureAuthenticatedReviewer(req, res, next) {
 
 //main page
 app.get('/', function(request, response) {
-  response.render('index.jade'/* ,
+  response.render('index.jade',
   {
-	isAuthenticated: false,
+	isAuthenticated: request.isAuthenticated(),
 	user: request.user
-  } */);
+  } );
 });
 
 //------------------------------------------
@@ -203,7 +204,7 @@ app.post('/login', passport.authenticate('local'/* , { successRedirect: '/',
 	if(req.user.id < 3 || req.user.id == 5032)
 		res.redirect('/admin/menu');
 	else if(req.user.id in [3,7,15])
-		res.redirect('/participant/menu')
+		res.redirect('/participant/menu');
 	else
 		res.redirect('/');
 });
@@ -388,42 +389,89 @@ app.post('/register', function(req, res) {
        { res.redirect('/'); }
     });
   });
-}); 
+});
 //------------------------------------------
+
+//POST requests for deleting conferences and papers
+//------------------------------------------
+//delete a conference
 app.post('/admin/conference/delete', function (req,res) {
    //delete the chosen conference
-    var fetchConferences;
-    var conferenceDAO;
+    var fetchConferences = [];
+    var conferenceDAO = {id: 19035};
     pg.connect(connectionString, function (err, client, done) {
         if (err) {
             console.error(err);
             res.send("Can't connect to a database" + err);
             return;
         }
-        client.query('SELECT * FROM conferences', function (err, result) {
-            done();
-            if (err) {
-                console.error(err);
-                res.send("Error " + err);
-            }
-            else{
-                fetchConferences = result.rows;
-            }
-        });
-        conferenceDAO = fetchConferences[req.body.conferenceNumber];
-        console.log(conferenceDAO.id);
-        /*client.query('DELETE FROM conferences WHERE id=$1',
-        [conferenceDAO.id],
-        function (err, result) {
-            done();
-            if (err) {
-                console.error(err);
-                res.send("Error " + err);
-            }
-        });*/
+        var query = client.query('SELECT * FROM conferences');
+		query.on('row', function(row, result) {
+			result.addRow(row);
+		});
+		query.on('end', function(result) {
+			//fired once and only once, after the last row has been returned and after all 'row' events are emitted
+			//in this example, the 'rows' array now contains an ordered set of all the rows which we received from postgres
+			console.log('conferences fetched');
+			fetchConferences = result.rows;
+			console.log(fetchConferences);
+			if(req.body.conferenceNumber <= fetchConferences.length)
+				conferenceDAO = fetchConferences[req.body.conferenceNumber-1];
+			console.log(conferenceDAO.id);
+
+			client.query('DELETE FROM conferences WHERE id=$1',
+				[conferenceDAO.id],
+				function (err, result) {
+					if (err) {
+						console.error(err);
+						res.send("Error " + err);
+					}
+				});
+		});
+		done();
     });
     res.redirect('back');
 });
+
+//delete a paper
+app.post('/admin/paper/delete', function (req,res) {
+   //delete the chosen paper
+    var fetchPapers = [];
+    var paperDAO = {id: 19035};
+    pg.connect(connectionString, function (err, client, done) {
+        if (err) {
+            console.error(err);
+            res.send("Can't connect to a database" + err);
+            return;
+        }
+        var query = client.query('SELECT * FROM papers');
+		query.on('row', function(row, result) {
+			result.addRow(row);
+		});
+		query.on('end', function(result) {
+			//fired once and only once, after the last row has been returned and after all 'row' events are emitted
+			//in this example, the 'rows' array now contains an ordered set of all the rows which we received from postgres
+			console.log('papers fetched');
+			fetchPapers = result.rows;
+			console.log(fetchPapers);
+			if(req.body.paperNumber <= fetchPapers.length)
+				paperDAO = fetchPapers[req.body.paperNumber-1];
+			console.log(paperDAO.id);
+
+			client.query('DELETE FROM papers WHERE id=$1',
+				[paperDAO.id],
+				function (err, result) {
+					if (err) {
+						console.error(err);
+						res.send("Error " + err);
+					}
+				});
+		});
+		done();
+    });
+    res.redirect('back');
+});
+//------------------------------------------
 
 //because db is written in ejs, we have to change the view engine temporarily
 app.set('view engine', 'ejs');

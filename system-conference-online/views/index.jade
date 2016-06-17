@@ -6,7 +6,8 @@ block content
       img.img-responsive(src='/src/logo.png', alt='logo')
       p.page-name Conference
       p.page-name-description online system
-    //a(href='/logout') Wyloguj się
+    unless isAuthenticated
+      a(href='/logout') Wyloguj się
   .container
     nav
       div
