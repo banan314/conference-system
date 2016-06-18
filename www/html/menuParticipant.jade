@@ -1,0 +1,23 @@
+﻿doctype html
+html(lang='pl', xmlns='http://www.w3.org/1999/html')
+  head
+    meta(content='pl', http-equiv='Content-Language')
+    meta(charset='utf-8')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    title Menu
+    link(href='../css/bootstrap.min.css', rel='stylesheet')
+    link(href='../css/stylesheet.css', rel='stylesheet')
+    link(href='https://fonts.googleapis.com/css?family=Lato:400,300,700,900', rel='stylesheet', type='text/css')
+    //if lt IE 9
+      | [if lt IE 9]
+      script(src='https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js')
+      script(src='https://oss.maxcdn.com/respond/1.4.2/respond.min.js')
+      |     [endif]
+  body
+    p.h4 Menu
+    form(method='post')
+      input(name='Przeglad', type='submit', value='Przegl±daj konferencje')
+      input(name='registerArticle', type='submit', value='Zg³o¶ Artyku³')
+      input(name='Zaplata', type='submit', value='Do zap³aty')
+      input(name='PayButton', type='submit', value='Zg³o¶ chêæ zostania recenzentem')

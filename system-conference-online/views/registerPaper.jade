@@ -1,0 +1,38 @@
+﻿doctype html
+html(lang='pl', xmlns='http://www.w3.org/1999/html')
+  head
+    meta(content='pl', http-equiv='Content-Language')
+    meta(charset='utf-8')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    title Zgłoś artykuł
+    link(href='../css/bootstrap.min.css', rel='stylesheet')
+    link(href='../css/stylesheet.css', rel='stylesheet')
+    link(href='https://fonts.googleapis.com/css?family=Lato:400,300,700,900', rel='stylesheet', type='text/css')
+    //if lt IE 9
+      | [if lt IE 9]
+      script(src='https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js')
+      script(src='https://oss.maxcdn.com/respond/1.4.2/respond.min.js')
+      |     [endif]
+  body
+    p.h4
+      | Formularz zgłoszenia artykułu naukowego połączonego z przemówieniem na
+      | konferencje
+    form(method='post', action='/paper/register')
+      div
+        label Temat artykułu:
+        input(name='paperTopic', required)
+      div
+        label#Label1 Streszczenie:
+        input(name='paperIntro', type='file', required)
+        // paper introduction
+      div
+        label#Label2 Referat (main content):
+        input(name='paperMainContent', type='file', required)
+      //div
+        //label#Label3 Przewidywany czas trwania przemówienia (10-25min): 
+        //input(name='speechTime', type='number', min='10', max='25')
+      input(name='paperSubmit', type='submit', value='Prześlij zgłoszenie')
+      div
+        form(action='https://system-conference-online.herokuapp.com/participant/menu')
+          input(name='Powrot', value='Powrót', type='submit')

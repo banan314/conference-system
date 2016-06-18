@@ -1,0 +1,30 @@
+doctype html(xmlns='http://www.w3.org/1999/html', lang='pl')
+head
+    meta(http-equiv='content-type', content='text/html; charset=UTF-8')
+    meta(content='pl', http-equiv='Content-Language')
+    meta(charset='utf-8')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    title Menu
+    link(href='Menu2_pliki/bootstrap.css', rel='stylesheet')
+    link(href='Menu2_pliki/stylesheet.css', rel='stylesheet')
+    //if lt IE 9
+      | if lt IE 9| [if lt IE 9]
+      | script(src=&apos;https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js&apos;)
+      | script(src=&apos;https://oss.maxcdn.com/respond/1.4.2/respond.min.js&apos;)
+      | |     [endif]
+  body
+    p.h4 Menu
+    div
+      form(action='https://system-conference-online.herokuapp.com/przeglad')
+        input(name='Przeglad', value='Przeglądaj konferencje', type='submit')
+      form(action='https://system-conference-online.herokuapp.com/paper/register')
+        input(name='registerArticle', value='Zgłoś Artykuł', type='submit')
+      form(action='https://system-conference-online.herokuapp.com/pay')
+        input(name='Zaplata', value='Do zapłaty', type='submit')
+      form(action='https://system-conference-online.herokuapp.com/reviewer/register')
+        input(name='registerreviewer', value='Zgłoś chęć zostania recenzentem', type='submit')
+      form(action='https://system-conference-online.herokuapp.com/')
+        input(name='Powrot', value='Powrót na stronę główną', type='submit')
+      form(action='https://system-conference-online.herokuapp.com/logout')
+        input(name='Wyloguj', value='Wyloguj', type='submit')

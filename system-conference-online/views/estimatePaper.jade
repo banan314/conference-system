@@ -1,0 +1,50 @@
+﻿doctype html
+html(lang='pl', xmlns='http://www.w3.org/1999/html')
+  head
+    meta(content='pl', http-equiv='Content-Language')
+    meta(charset='utf-8')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    title Oceń artykuł
+    link(href='../css/bootstrap.min.css', rel='stylesheet')
+    link(href='../css/stylesheet.css', rel='stylesheet')
+    //link(href='https://fonts.googleapis.com/css?family=Lato:400,300,700,900', rel='stylesheet', type='text/css')
+    //if lt IE 9
+      | [if lt IE 9]
+      script(src='https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js')
+      script(src='https://oss.maxcdn.com/respond/1.4.2/respond.min.js')
+      |     [endif]
+  body
+    p
+      strong
+        | Oceń artykuł na podstawie następujacych kryteriów
+        | (twoja ocena będzie widoczna przez autora artykułu):
+    form(method='post', action='/estimatepaper')
+      div
+        label#Label1 Słowna ocena artykułu:
+        input(name='estimation', type='text', required)
+      div
+        label#Label2 Komentarz dla organizatora:
+        textarea(cols='80', name='comment', rows='4')
+      div
+        label#Label3 Zgodność artykułu z tematem konferencji (1-5):
+        input(type='number', name='subjectMatch', min='1', max='5', required)
+      label#Label4 Wartość merytoryczna artykułu (1-5):
+      input(type='number', name='merValue', min='1', max='5', required)
+      div
+        label#Label5 Werdykt:
+        input(name='verdict', type='text')
+        //select(name='verdict')
+          //option(value='0') artykuł przyjęty
+          //option(value='1') artykuł do zmodyfikowania
+          //option(value='2') artykuł odrzucony
+      div
+        label#Label6 Id recenzenta:
+        select(name='user_id', required)
+          option 3
+          option 7
+          option 15
+      div
+        label#Label7 Id zgłoszenia referatu:
+        input(type='number', name='reviewer_id', min='1', max='7', required)
+      input(name='Submit1', type='submit', value='Prześlij ocenę')
