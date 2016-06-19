@@ -217,3 +217,5 @@ pip-log.txt
 
 #
 *.xml
+system-conference-online/.idea/workspace.xml
+*.xml
