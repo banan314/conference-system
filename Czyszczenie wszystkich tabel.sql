@@ -1,0 +1,12 @@
+delete from public.reviews;
+delete from public.applications;
+delete from public.revs_alloc;
+delete from public.reviewers;
+delete from public.speeches;
+delete from public.papers;
+delete from public.payments;
+delete from public.entries;
+delete from public.accommodations;
+delete from public.conferences;
+delete from public.administrators;
+delete from public.users;

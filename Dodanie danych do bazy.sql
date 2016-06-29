@@ -1,0 +1,192 @@
+INSERT INTO public.users
+VALUES(1, 'Damian', 'Jagiello', 'djag@baza.pl', 'jagdam1410'), 
+(2, 'Adrianna', 'Klepka', 'aklep@baza.pl', 'kleadr93'),
+(3, 'Glowoslaw', 'Jacykow', 'gjac@baza.pl', 'jacglo13'),
+(4, 'Radziwil', 'Jankowski', 'rjan@baza.pl', 'janrad192'),
+(5, 'Agata', 'Krol', 'akro@baza.pl', 'kroaga532'),
+(6, 'Albert', 'Nowak', 'anow@baza.pl', 'nowalb456'),
+(7, 'Katarzyna', 'Dabrowski', 'kdab@baza.pl', 'dabkat741'),
+(8, 'Linda', 'Wojcik', 'lwoj@baza.pl', 'wojlin651'),
+(9, 'Miroslaw', 'Kozlowski', 'mkoz@baza.pl', 'kozmir168'),
+(10, 'Szymon', 'Grabowski', 'szgrab@baza.pl', 'graszy79'),
+(11, 'Michal', 'Nowicki', 'mnow@baza.pl', 'nowmic348'),
+(12, 'Wiktoria', 'Adamczyk', 'wadam@baza.pl', 'adamwik978'),
+(13, 'Kacper', 'Zajac', 'kzaj@baza.pl', 'zajkac15'),
+(14, 'Julia', 'Dudek', 'jdud@baza.pl', 'dudjul35'),
+(15, 'Aleksandra', 'Wieczorek', 'awie@baza.pl', 'wieale325'),
+(16, 'Bartosz', 'Majewski', 'bmaj@baza.pl', 'majbar98'),
+(17, 'Filip', 'Witkowski', 'fwit@baza.pl', 'witfil23'),
+(18, 'Zuzanna', 'Stepien', 'zste@baza.pl', 'stepzuz69'),
+(19, 'Jan', 'Michalak', 'jmich@baza.pl', 'micjan232'),
+(20, 'Zofia', 'Rutkowski', 'zrut@baza.pl', 'rutzof54');
+
+INSERT INTO public.administrators
+(id, user_id)
+VALUES(1, 1),
+	(2, 2);
+
+INSERT INTO public.conferences
+values (1, 'Systemy ITS w komunikacji miejskiej', to_timestamp('28/05/16 14:45','DD/MM/YY HH24:MI'), 10, 150, 'Rzeszów', 1),
+(2, 'Wybrane rozwiazania dla technologii Smart Grid', to_timestamp('28/05/16 16:30','DD/MM/YY HH24:MI'), 10, 150, 'Rzeszów', 1),
+(3, 'Optymalizacja Data Center - trendy i wyzwania', to_timestamp('28/05/16 18:15','DD/MM/YY HH24:MI'), 10, 150, 'Rzeszów', 1),
+(4, 'Smart City/ITS', to_timestamp('29/05/16 13:30','DD/MM/YY HH24:MI'), 20, 80, 'Rzeszów', 2),
+(5, 'Zasady tworzenia aplikacji dla MSP', to_timestamp('29/05/16 15:15','DD/MM/YY HH24:MI'), 20, 80, 'Rzeszów', 2),
+(6, 'Zdalne sterowanie obiektów', to_timestamp('29/05/16 17:00','DD/MM/YY HH24:MI'), 20, 80, 'Rzeszów', 2);
+
+insert into public.accommodations
+values (1, 'Hotel Rzeszów - 4-gwiazdkowy', 'Rzeszów, al. J. Pilsudskiego 44 ', 230, 1),
+(2, 'Hotel Ambasadorski - 4-gwiazdkowy', 'Rzeszów, Rynek 13', 232, 2),
+(3, 'Hotel Ambasadorski - 4-gwiazdkowy', 'Rzeszów, Rynek 13', 232, 5),
+(4, 'Hotel Ambasadorski - 4-gwiazdkowy', 'Rzeszów, Rynek 13', 232, 6),
+(5, 'Hotel Ferdynand - 3-gwiazdkowy', 'Rzeszów, Artura Grottgera 28', 157, 3),
+(6, 'Hotel Hetman - 3-gwiazdkowy', 'Rzeszów, Generala Mariana Langiewicza 29', 129, 4);
+
+insert into public.entries
+values (1, 1, 6, 1),
+(2, 1, 4, 3),
+(3, 1, 3, 5),
+(4, 1, 1, 6),
+(5, 1, 5, 7),
+(6, 1, 2, 10),
+(7, 1, 3, 11),
+(8, 1, 1, 12),
+(9, 1, 4, 13),
+(10, 1, 1, 14),
+(11, 1, 1, 15),
+(12, 1, 5, 16),
+(13, 1, 2, 18),
+(14, 1, 2, 19),
+(15, 1, 6, 20),
+(16, 2, 2, 1),
+(17, 2, 1, 3),
+(18, 2, 4, 7),
+(19, 2, 1, 9),
+(20, 2, 5, 10),
+(21, 2, 6, 16),
+(22, 2, 2, 17),
+(23, 3, 4, 1),
+(24, 3, 5, 3),
+(25, 3, 4, 4),
+(26, 3, 2, 5),
+(27, 3, 2, 11),
+(28, 3, 1, 17),
+(29, 3, 5, 19),
+(30, 3, 3, 20),
+(31, 4, 3, 2),
+(32, 4, 4, 9),
+(33, 4, 2, 4),
+(34, 4, 2, 7),
+(35, 4, 1, 11),
+(36, 4, 6, 13),
+(37, 4, 4, 17),
+(38, 4, 4, 18),
+(39, 4, 1, 19),
+(40, 4, 5, 20),
+(41, 5, 1, 2),
+(42, 5, 3, 4),
+(43, 5, 4, 8),
+(44, 5, 5, 9),
+(45, 5, 1, 13),
+(46, 5, 3, 14),
+(47, 5, 6, 17),
+(48, 6, 2, 2),
+(49, 6, 4, 15),
+(50, 6, 4, 19);
+
+insert into public.payments
+values (1, 10, 1, 1),
+(2, 10, 2,3),
+(3, 10, 3,5),
+(4, 10, 4,6),
+(5, 10, 5,7),
+(6, 10, 6,10),
+(7, 10, 7,11),
+(8, 10, 8,12),
+(9, 10, 9,13),
+(10, 10, 10,14),
+(11, 10, 11,15),
+(12, 10, 12,16),
+(13, 10, 13,18),
+(14, 10, 14,19),
+(15, 10, 15,20),
+(16, 10, 16,1),
+(17, 10, 17,3),
+(18, 10, 18,7),
+(19, 10, 19,9),
+(20, 10, 20,10),
+(21, 10, 21,16),
+(22, 10, 22,17),
+(23, 10, 23,1),
+(24, 10, 24,3),
+(25, 10, 25,4),
+(26, 10, 26,5),
+(27, 10, 27,11),
+(28, 10, 28,17),
+(29, 10, 29,19),
+(30, 10, 30,20),
+(31, 20, 31,2),
+(32, 20, 32,9),
+(33, 20, 33,4),
+(34, 20, 34,7),
+(35, 20, 35,11),
+(36, 20, 36,13),
+(37, 20, 37,17),
+(38, 20, 38,18),
+(39, 20, 39,19),
+(40, 20, 40,20),
+(41, 20, 41,2),
+(42, 20, 42,4),
+(43, 20, 43,8),
+(44, 20, 44,9),
+(45, 20, 45,13),
+(46, 20, 46,14),
+(47, 20, 47,17),
+(48, 20, 48,2),
+(49, 20, 49,15),
+(50, 20, 50,19);
+
+insert into public.papers
+values (1, 'Co to jest system ITS', 'Rozszyfrowanie skrotu, wprowadzenie do tematyki', 'Szczegolowy opis systemu ITS - dzialanie', 13),
+(2, 'Przyklad uzycia systemu ITS', 'ITS w komunikacji miejskiej', 'Omowienie dzialania systemu', 5),
+(3, 'Smart Grid', 'Przykladowe zastosowania', 'Szczegolowa analiza zastosowan technologii Smart Grid', 4),
+(4, 'Data Center', 'Optymalizacja - co i jak?', 'Omowienie trendow oraz problemow, ktore mozemy napotkac podczas optymalizacji', 16),
+(5, 'Smart City', 'Technologie wykorzystywane przy projektach Smart City', 'Omowienie systemu ITS w projekcie Smart City', 11),
+(6, 'Aplikacje dla MSP', 'MSP - wymagania', 'Zasaday tworzenia aplikacji dla MSP', 18),
+(7, 'Sterowanie obiektami', 'Sposoby realizacji zdalnego sterowania', 'Wydajnosc sposobow zdalnego sterowania obiektami', 20);
+
+insert into public.applications
+values (1, 1, 1),
+(2, 1, 2),
+(3, 2, 3),
+(4, 3, 4),
+(5, 4, 5),
+(6, 5, 6),
+(7, 6, 7);
+
+insert into public.speeches
+values (1, 2, 30, 2),
+(2, 3, 45, 1),
+(5, 6, 15, 2);
+
+insert into public.reviewers
+values (1, 'IoT, Smart Cities, IT', 3),
+(2, 'DB, Cloud Computing', 7),
+(3, 'IT, Embaded Systems', 15);
+
+insert into public.revs_alloc
+values (1, 1),
+(2, 3),
+(3, 2),
+(4, 3),
+(5, 1),
+(6, 2);
+
+insert into public.reviews
+values (1, 1, 'Nie spelnia wymagan', 'Odbieganie od tematue', 4, 1.5, 'Odrzucony'),
+(2, 2, 'Spelnia wymagania', 'Interesujaca problematyka', 4, 4.5, 'Zaakceptowany'),
+(3, 3, 'Spelnia wymagania', 'Ciekawe spojrzenie', 3.5, 5, 'Zaakceptowany'),
+(1, 4, 'Nie spelnia wymagan', 'Za malo szczegolowy', 3, 1.5, 'Odrzucony'),
+(2, 5, 'Nie spelnia wymagan', 'Znaleziono bledy', 4, 1, 'Odrzucony'),
+(3, 6, 'Spelnia wymagania', 'Referat rzeczowy', 4.5, 4, 'Zaakceptowany'),
+(1, 7, 'Nie spelnia wymagan', 'Temat rozbiezny', 1, 3, 'Odrzucony');
+
