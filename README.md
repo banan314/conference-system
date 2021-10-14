@@ -1,2 +1,3 @@
-# system-konferencji
-System do obsługi konferencji
+# Conference system
+
+System for scheduling and managing conferences.
